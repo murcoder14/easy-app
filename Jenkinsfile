@@ -26,9 +26,8 @@ pipeline {
         stage('Package') {
             steps {
                 echo 'Packaging....'
-                sh 'GIT_SHORT_COMMIT=$(echo $GIT_COMMIT | cut -c 1-7)
-                mvn versions:set -DnewVersion="$GIT_SHORT_COMMIT"
-                mvn versions:commit'
+                sh 'GIT_SHORT_COMMIT=$(echo $GIT_COMMIT | cut -c 1-7)'
+                sh 'mvn versions:set -DnewVersion="$GIT_SHORT_COMMIT" mvn versions:commit'
                 sh 'mvn package -DskipTests'
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
