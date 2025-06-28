@@ -1,45 +1,47 @@
 pipeline {
-    agent any
-    
-    options {
-        timeout(time: 3, unit: 'MINUTES')
-        disableConcurrentBuilds()
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        echo 'Compiling..'
+        sh 'mvn compile'
+      }
     }
 
-    tools {
-        maven 'Maven 3.9.10'
+    stage('Test') {
+      steps {
+        echo 'Testing..'
+        sh 'mvn clean test'
+      }
     }
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Compiling..'
-                sh 'mvn compile'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh 'mvn clean test'
-            }
-        }
-        stage('Package') {
-            steps {
-                echo 'Packaging....'
-                sh 'mvn package -DskipTests'
-            }
-        }
+    stage('Package') {
+      steps {
+        echo 'Packaging....'
+        sh 'mvn package -DskipTests'
+      }
     }
 
-    post {
-        success {
-            echo 'Build, Test, and Package stages completed successfully!'
-        }
-        failure {
-            echo 'One or more stages failed. Please check the logs.'
-        }
-        always {
-            echo 'This will always execute, regardless of the build result.'
-        }
+  }
+  tools {
+    maven 'Maven 3.9.10'
+  }
+  post {
+    success {
+      echo 'Build, Test, and Package stages completed successfully!'
     }
+
+    failure {
+      echo 'One or more stages failed. Please check the logs.'
+    }
+
+    always {
+      echo 'This will always execute, regardless of the build result.'
+    }
+
+  }
+  options {
+    timeout(time: 3, unit: 'MINUTES')
+    disableConcurrentBuilds()
+  }
 }
