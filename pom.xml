@@ -80,20 +80,6 @@
 
 	</dependencies>
 
-	 <!-- IMPORTANT: This section is required for deployment -->
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>https://undenounced-elza-noncalumniating.ngrok-free.dev/repository/tm-maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>https://undenounced-elza-noncalumniating.ngrok-free.dev/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
