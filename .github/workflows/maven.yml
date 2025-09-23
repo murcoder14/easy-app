@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to Nexus
       run: |
         mvn deploy -DskipTests \
-          -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}/repository/maven-releases/ \
+          -DaltDeploymentRepository=nexus::default::${{ secrets.NEXUS_URL }}/repository/tm-maven-releases/ \
           -Dusername=${{ secrets.NEXUS_USERNAME }} \
           -Dpassword=${{ secrets.NEXUS_PASSWORD }}
       env:
