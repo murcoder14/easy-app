@@ -51,6 +51,8 @@ jobs:
         EOF
     
     - name: Deploy to Nexus
-      run: mvn deploy -DskipTests
+      run: |
+        mvn deploy -DskipTests \
+          -DaltDeploymentRepository=nexus-releases::default::${{ secrets.NEXUS_URL }}/repository/tm-maven-releases/
       env:
         MAVEN_OPTS: "-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true"
